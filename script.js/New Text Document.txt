@@ -1,0 +1,44 @@
+// script.js
+
+document.getElementById('send-btn').addEventListener('click', function() {
+  const userInput = document.getElementById('user-input').value;
+  
+  if (userInput.trim() !== "") {
+    addMessage(userInput, 'user');
+    document.getElementById('user-input').value = ''; // Clear input field
+    simulateBotResponse(userInput); // Simulate bot response
+  }
+});
+
+function addMessage(message, sender) {
+  const messageContainer = document.createElement('div');
+  messageContainer.classList.add('message', sender);
+  messageContainer.textContent = message;
+
+  document.getElementById('chat-box').appendChild(messageContainer);
+  scrollToBottom();
+}
+
+function scrollToBottom() {
+  const chatBox = document.getElementById('chat-box');
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Simulating bot response (replace with actual API interaction)
+function simulateBotResponse(userMessage) {
+  setTimeout(function() {
+    const botResponse = getBotResponse(userMessage); // Simulate bot response
+    addMessage(botResponse, 'bot');
+  }, 1000); // Simulate a 1-second delay for response
+}
+
+// A simple function to simulate bot responses
+function getBotResponse(message) {
+  const responses = {
+    "hello": "Hi! How can I help you today?",
+    "how are you?": "I'm just a bot, but I'm doing great! How about you?",
+    "bye": "Goodbye! Have a great day!",
+  };
+
+  return responses[message.toLowerCase()] || "Sorry, I didn't understand that.";
+}
